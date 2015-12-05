@@ -55,6 +55,9 @@ endif
 #
 ##############################
 
+EANY_PILOT_TOOLS_URL_0 := http://wiki.openpilot.org/download/attachments/18612236
+EANY_PILOT_TOOLS_URL_1 := https://github.com/librepilot/librepilot.github.io/raw/master/tools
+
 ifeq ($(UNAME), Linux)
     ifeq ($(ARCH), x86_64)
         ARM_SDK_URL := https://launchpad.net/gcc-arm-embedded/4.9/4.9-2014-q4-major/+download/gcc-arm-none-eabi-4_9-2014q4-20141203-linux.tar.bz2
@@ -88,11 +91,11 @@ else ifeq ($(UNAME), Windows)
     QT_SDK_URL     := http://download.qt-project.org/official_releases/qt/5.4/5.4.0/qt-opensource-windows-x86-mingw491_opengl-5.4.0.exe
     QT_SDK_MD5_URL := http://download.qt-project.org/official_releases/qt/5.4/5.4.0/qt-opensource-windows-x86-mingw491_opengl-5.4.0.exe.md5
     QT_SDK_ARCH    := mingw491_32
-    NSIS_URL       := http://wiki.openpilot.org/download/attachments/18612236/nsis-2.46-unicode.tar.bz2
-    SDL_URL        := http://wiki.openpilot.org/download/attachments/18612236/SDL-devel-1.2.15-mingw32.tar.gz
-    OPENSSL_URL    := http://wiki.openpilot.org/download/attachments/18612236/openssl-1.0.1e-win32.tar.bz2
-    UNCRUSTIFY_URL := http://wiki.openpilot.org/download/attachments/18612236/uncrustify-0.60-windows.tar.bz2
-    DOXYGEN_URL    := http://wiki.openpilot.org/download/attachments/18612236/doxygen-1.8.3.1-windows.tar.bz2
+    NSIS_URL       := $(EANY_PILOT_TOOLS_URL_1)/nsis-2.46-unicode.tar.bz2
+    SDL_URL        := $(EANY_PILOT_TOOLS_URL_1)/SDL-devel-1.2.15-mingw32.tar.gz
+    OPENSSL_URL    := $(EANY_PILOT_TOOLS_URL_1)/openssl-1.0.1e-win32.tar.bz2
+    UNCRUSTIFY_URL := $(EANY_PILOT_TOOLS_URL_1)/uncrustify-0.60-windows.tar.bz2
+    DOXYGEN_URL    := $(EANY_PILOT_TOOLS_URL_1)/doxygen-1.8.3.1-windows.tar.bz2
     MESAWIN_URL    := http://wiki.openpilot.org/download/attachments/18612236/mesawin.tar.gz
 endif
 
