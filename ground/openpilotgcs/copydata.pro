@@ -150,7 +150,8 @@ GCS_LIBRARY_PATH
         # it is more robust to take the following DLLs from Qt rather than from MinGW
         QT_DLLS += libgcc_s_dw2-1.dll \
                    libstdc++-6.dll \
-                   libwinpthread-1.dll
+                   libwinpthread-1.dll \
+                   libpcre16-0.dll
         for(dll, QT_DLLS) {
             data_copy.commands += $(COPY_FILE) $$targetPath(\"$$[QT_INSTALL_BINS]/$$dll\") $$targetPath(\"$$GCS_APP_PATH/$$dll\") $$addNewline()
         }
