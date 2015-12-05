@@ -2,6 +2,8 @@ include(openpilotgcs.pri)
 
 TEMPLATE = subdirs
 
+ICU_VER = 55
+
 # Copy Qt runtime libraries into the build directory (to run or package)
 equals(copyqt, 1) {
 
@@ -142,9 +144,9 @@ GCS_LIBRARY_PATH
                   Qt5MultimediaWidgets$${DS}.dll \
                   Qt5Quick$${DS}.dll \
                   Qt5Qml$${DS}.dll \
-                  icuin53.dll \
-                  icudt53.dll \
-                  icuuc53.dll
+                  icuin$${ICU_VER}.dll \
+                  icudt$${ICU_VER}.dll \
+                  icuuc$${ICU_VER}.dll
         # it is more robust to take the following DLLs from Qt rather than from MinGW
         QT_DLLS += libgcc_s_dw2-1.dll \
                    libstdc++-6.dll \
@@ -233,14 +235,17 @@ GCS_LIBRARY_PATH
             ssleay32.dll \
             libeay32.dll
         for(dll, OPENSSL_DLLS) {
-            data_copy.commands += $(COPY_FILE) $$targetPath(\"$${OPENSSL_DIR}/$$dll\") $$targetPath(\"$$GCS_APP_PATH/$$dll\") $$addNewline()
+            #data_copy.commands += $(COPY_FILE) $$targetPath(\"$${OPENSSL_DIR}/$$dll\") $$targetPath(\"$$GCS_APP_PATH/$$dll\") $$addNewline()
+            data_copy.commands += $(COPY_FILE) $$targetPath(\"$$[QT_INSTALL_BINS]/$$dll\") $$targetPath(\"$$GCS_APP_PATH/$$dll\") $$addNewline()
         }
 
         # copy OpenGL DLL
         OPENGL_DLLS = \
-            opengl32_32/opengl32.dll
+            opengl32.dll
+            #opengl32_32/opengl32.dll
         for(dll, OPENGL_DLLS) {
-            data_copy.commands += $(COPY_FILE) $$targetPath(\"$${MESAWIN_DIR}/$$dll\") $$targetPath(\"$$GCS_APP_PATH/$$dll\") $$addNewline()
+            #data_copy.commands += $(COPY_FILE) $$targetPath(\"$${MESAWIN_DIR}/$$dll\") $$targetPath(\"$$GCS_APP_PATH/$$dll\") $$addNewline()
+            data_copy.commands += $(COPY_FILE) $$targetPath(\"$$[QT_INSTALL_BINS]/$$dll\") $$targetPath(\"$$GCS_APP_PATH/$$dll\") $$addNewline()
         }
 
         data_copy.target = FORCE
