@@ -152,6 +152,7 @@ GCS_LIBRARY_PATH
                    libstdc++-6.dll \
                    libwinpthread-1.dll \
                    libpcre16-0.dll
+        QT_DLLS += zlib1.dll libharfbuzz-0.dll libfreetype-6.dll libbz2-1.dll libpng16-16.dll libglib-2.0-0.dll libintl-8.dll libiconv-2.dll
         for(dll, QT_DLLS) {
             data_copy.commands += $(COPY_FILE) $$targetPath(\"$$[QT_INSTALL_BINS]/$$dll\") $$targetPath(\"$$GCS_APP_PATH/$$dll\") $$addNewline()
         }
