@@ -63,7 +63,7 @@ extern "C" {
 
 #include <hidsdi.h>
 
-#if 0
+#if 1
 HIDAPI VOID WINAPI HidD_GetHidGuid(LPGUID);
 HIDAPI BOOL WINAPI HidD_GetPreparsedData(HANDLE, PHIDP_PREPARSED_DATA *);
 HIDAPI BOOL WINAPI HidD_FreePreparsedData(PHIDP_PREPARSED_DATA);
