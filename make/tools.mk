@@ -1211,5 +1211,3 @@ else
     ANDROID    ?= android
     ANDROID_DX ?= dx
 endif
-
-$(info $(EMPTY) WARNING     Using PATH - $(PATH))
