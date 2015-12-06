@@ -2,7 +2,7 @@ include(openpilotgcs.pri)
 
 TEMPLATE = subdirs
 
-ICU_VER = 55
+ICU_VER = 53
 
 # Copy Qt runtime libraries into the build directory (to run or package)
 equals(copyqt, 1) {
@@ -144,9 +144,9 @@ GCS_LIBRARY_PATH
                   Qt5MultimediaWidgets$${DS}.dll \
                   Qt5Quick$${DS}.dll \
                   Qt5Qml$${DS}.dll \
-                  libicuin$${ICU_VER}.dll \
-                  libicudt$${ICU_VER}.dll \
-                  libicuuc$${ICU_VER}.dll
+                  icuin$${ICU_VER}.dll \
+                  icudt$${ICU_VER}.dll \
+                  icuuc$${ICU_VER}.dll
         # it is more robust to take the following DLLs from Qt rather than from MinGW
         QT_DLLS += libgcc_s_dw2-1.dll \
                    libstdc++-6.dll \

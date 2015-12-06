@@ -57,6 +57,7 @@ endif
 
 EANY_PILOT_TOOLS_URL_0 := http://wiki.openpilot.org/download/attachments/18612236
 EANY_PILOT_TOOLS_URL_1 := https://github.com/librepilot/librepilot.github.io/raw/master/tools
+EANY_PILOT_TOOLS_URL_X := $(EANY_PILOT_TOOLS_URL_1)
 
 ifeq ($(UNAME), Linux)
     ifeq ($(ARCH), x86_64)
@@ -91,15 +92,15 @@ else ifeq ($(UNAME), Windows)
     QT_SDK_URL     := http://download.qt-project.org/official_releases/qt/5.4/5.4.0/qt-opensource-windows-x86-mingw491_opengl-5.4.0.exe
     QT_SDK_MD5_URL := http://download.qt-project.org/official_releases/qt/5.4/5.4.0/qt-opensource-windows-x86-mingw491_opengl-5.4.0.exe.md5
     QT_SDK_ARCH    := mingw491_32
-    NSIS_URL       := $(EANY_PILOT_TOOLS_URL_1)/nsis-2.46-unicode.tar.bz2
-    SDL_URL        := $(EANY_PILOT_TOOLS_URL_1)/SDL-devel-1.2.15-mingw32.tar.gz
-    OPENSSL_URL    := $(EANY_PILOT_TOOLS_URL_1)/openssl-1.0.1e-win32.tar.bz2
-    UNCRUSTIFY_URL := $(EANY_PILOT_TOOLS_URL_1)/uncrustify-0.60-windows.tar.bz2
-    DOXYGEN_URL    := $(EANY_PILOT_TOOLS_URL_1)/doxygen-1.8.3.1-windows.tar.bz2
-    MESAWIN_URL    := $(EANY_PILOT_TOOLS_URL_1)/mesawin.tar.gz
+    NSIS_URL       := $(EANY_PILOT_TOOLS_URL_X)/nsis-2.46-unicode.tar.bz2
+    SDL_URL        := $(EANY_PILOT_TOOLS_URL_X)/SDL-devel-1.2.15-mingw32.tar.gz
+    OPENSSL_URL    := $(EANY_PILOT_TOOLS_URL_X)/openssl-1.0.1e-win32.tar.bz2
+    UNCRUSTIFY_URL := $(EANY_PILOT_TOOLS_URL_X)/uncrustify-0.60-windows.tar.bz2
+    DOXYGEN_URL    := $(EANY_PILOT_TOOLS_URL_X)/doxygen-1.8.3.1-windows.tar.bz2
+    MESAWIN_URL    := $(EANY_PILOT_TOOLS_URL_X)/mesawin.tar.gz
 endif
 
-GTEST_URL := http://wiki.openpilot.org/download/attachments/18612236/gtest-1.6.0.zip
+GTEST_URL := $(EANY_PILOT_TOOLS_URL_X)/gtest-1.6.0.zip
 
 # When changing PYTHON_DIR, you must also update it in ground/openpilotgcs/src/python.pri
 # When changing SDL_DIR or OPENSSL_DIR, you must also update them in ground/openpilotgcs/openpilotgcs.pri
@@ -590,7 +591,8 @@ QT_SDK_PREFIX := $(QT_SDK_DIR)/5.4/$(QT_SDK_ARCH)
 define QT_SDK_CONFIGURE_TEMPLATE
 	@$(ECHO) $(MSG_CONFIGURING) $(call toprel, $(QT_SDK_DIR))
 	$(V1) $(ECHO) $(QUOTE)[Paths]$(QUOTE) > $(QT_SDK_PREFIX)/bin/qt.conf
-	$(V1) $(ECHO) $(QUOTE)Prefix = $(QT_SDK_PREFIX)$(QUOTE) >> $(QT_SDK_PREFIX)/bin/qt.conf
+	$(V1) $(ECHO) $(QUOTE)Prefix = $(shell cygpath -w $(QT_SDK_PREFIX))$(QUOTE) >> $(QT_SDK_PREFIX)/bin/qt.conf
+	#$(V1) $(ECHO) $(QUOTE)Prefix = ..$(QUOTE) >> $(QT_SDK_PREFIX)/bin/qt.conf
 endef
 
 QT_BUILD_DIR := $(BUILD_DIR)/QT_BUILD
@@ -1209,3 +1211,5 @@ else
     ANDROID    ?= android
     ANDROID_DX ?= dx
 endif
+
+$(info $(EMPTY) WARNING     Using PATH - $(PATH))
