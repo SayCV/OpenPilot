@@ -17,13 +17,13 @@ INCLUDEPATH *= $$PWD/../../../../../tools/libkml/include
 DEPENDPATH *= $$PWD/../../../../../tools/libkml/include
 
 win32:CONFIG(release, debug|release): {
-    LIBS *= -L$$PWD/../../../../../tools/libkml/lib/release/
+    LIBS *= -L$$PWD/../../../../../tools/libkml/lib/
 }
 else:win32:CONFIG(debug, debug|release): {
-    LIBS *= -L$$PWD/../../../../../tools/libkml/lib/debug/
+    LIBS *= -L$$PWD/../../../../../tools/libkml/lib/
 }
 else:unix: {
     LIBS *= -L$$PWD/../../../../../tools/libkml/lib/
 }
 
-LIBS *= -lkmlbase -lkmlconvenience -lkmlengine -lkmlregionator -lkmldom
+LIBS *= -lkmlbase -lkmlconvenience -lkmlengine -lkmlregionator -lkmldom -lkmlxsd -lminizip -luriparser -lgcc -lstdc++
