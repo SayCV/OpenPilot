@@ -21,7 +21,9 @@ SOURCES = version_info.cpp
     VERSION_INFO_SCRIPT   = $$ROOT_DIR/make/scripts/version-info.py
     VERSION_INFO_COMMAND  = $$PYTHON \"$$VERSION_INFO_SCRIPT\"
     VERSION_INFO_TEMPLATE = $$GCS_SOURCE_TREE/src/libs/version_info/version_info.cpp.template
+    VERSION_INFO_HEADER_TEMPLATE = $$ROOT_DIR/make/templates/gcsversioninfotemplate.h
     VERSION_INFO_FILE     = $$VERSION_INFO_DIR/version_info.cpp
+    VERSION_INFO_HEADER   = $$VERSION_INFO_DIR/version_info.h
     UAVO_DEF_PATH         = $$ROOT_DIR/shared/uavobjectdefinition
 
     # Create custom version_info target which generates a real file
@@ -32,12 +34,21 @@ SOURCES = version_info.cpp
                                     --template=\"$$VERSION_INFO_TEMPLATE\" \
                                     --uavodir=\"$$UAVO_DEF_PATH\" \
                                     --outfile=\"$$VERSION_INFO_FILE\"
+    
+    version_info_header.target   = $$VERSION_INFO_HEADER
+    version_info_header.commands += $$VERSION_INFO_COMMAND \
+                                    --path=\"$$ROOT_DIR\" \
+                                    --template=\"$$VERSION_INFO_HEADER_TEMPLATE\" \
+                                    --uavodir=\"$$UAVO_DEF_PATH\" \
+                                    --outfile=\"$$VERSION_INFO_HEADER\"
+    
     version_info.depends = FORCE
-    QMAKE_EXTRA_TARGETS += version_info
+    version_info_header.depends = FORCE
+    QMAKE_EXTRA_TARGETS += version_info version_info_header
 
     # Hook version_info target in between qmake's Makefile update and
     # the actual project target
-    version_info_hook.depends = version_info
+    version_info_hook.depends = version_info version_info_header
     debug_and_release {
         CONFIG(debug,debug|release):version_info_hook.target = Makefile.Debug
         CONFIG(release,debug|release):version_info_hook.target = Makefile.Release

@@ -44,8 +44,8 @@ namespace Constants {
     "." STRINGIFY(GCS_VERSION_RELEASE)
 
 const char *const GCS_VERSION_LONG = GCS_VERSION;
-const char *const GCS_AUTHOR = "The OpenPilot Project";
-const char *const GCS_HELP   = "http://wiki.openpilot.org";
+const char *const GCS_AUTHOR = "The eAnyPilot Project";
+const char *const GCS_HELP   = "http://wiki.eAnyPilot.org";
 
 #undef GCS_VERSION
 #undef STRINGIFY

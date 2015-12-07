@@ -206,6 +206,17 @@ plugin_uavobjectutil.depends = plugin_coreplugin
 plugin_uavobjectutil.depends += plugin_uavobjects
 SUBDIRS += plugin_uavobjectutil
 
+win32: CONFIG += KML
+
+KML { 
+    # KML Export plugin
+    plugin_kmlexport.subdir = kmlexport
+    plugin_kmlexport.depends = plugin_coreplugin
+    plugin_kmlexport.depends += plugin_uavobjects
+    plugin_kmlexport.depends += plugin_uavtalk
+    SUBDIRS += plugin_kmlexport
+}
+
 # OSG Earth View plugin
 OSG {
     plugin_osgearthview.subdir = osgearthview
@@ -251,4 +262,3 @@ plugin_flightlog.depends = plugin_coreplugin
 plugin_flightlog.depends += plugin_uavobjects
 plugin_flightlog.depends += plugin_uavtalk
 SUBDIRS += plugin_flightlog
-

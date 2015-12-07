@@ -69,6 +69,8 @@ public:
     bool sendObject(UAVObject *obj, bool acked, bool allInstances);
     bool sendObjectRequest(UAVObject *obj, bool allInstances);
     void cancelTransaction(UAVObject *obj);
+    
+    bool processInputByte(quint8 rxbyte);
 
 signals:
     void transactionCompleted(UAVObject *obj, bool success);
@@ -147,7 +149,7 @@ private:
 
     // Methods
     bool objectTransaction(quint8 type, quint32 objId, quint16 instId, UAVObject *obj);
-    bool processInputByte(quint8 rxbyte);
+    
     bool receiveObject(quint8 type, quint32 objId, quint16 instId, quint8 *data, qint32 length);
     UAVObject *updateObject(quint32 objId, quint16 instId, quint8 *data);
     void updateAck(quint8 type, quint32 objId, quint16 instId, UAVObject *obj);

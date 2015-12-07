@@ -26,6 +26,11 @@ SOURCES += \
 OTHER_FILES += UAVObjects.pluginspec
 
 # Add in all of the synthetic/generated uavobject files
+HEADERS += $$files($$UAVOBJECT_SYNTHETICS/*.h)
+SOURCES += $$files($$UAVOBJECT_SYNTHETICS/*.cpp)
+
+ignore-for-future {
+# Add in all of the synthetic/generated uavobject files
 HEADERS += \
     $$UAVOBJECT_SYNTHETICS/vtolselftuningstats.h \
     $$UAVOBJECT_SYNTHETICS/accelgyrosettings.h \
@@ -238,4 +243,4 @@ SOURCES += \
     $$UAVOBJECT_SYNTHETICS/auxmagsettings.cpp \
     $$UAVOBJECT_SYNTHETICS/gpsextendedstatus.cpp \
     $$UAVOBJECT_SYNTHETICS/perfcounter.cpp
-
+}
