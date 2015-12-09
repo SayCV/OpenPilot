@@ -63,7 +63,15 @@ extern "C" {
 
 #include <hidsdi.h>
 
-#if 1
+#if defined(__GNUC__)
+
+#define GCC_VERSION (__GNUC__ * 10000 \
+                               + __GNUC_MINOR__ * 100 \
+                               + __GNUC_PATCHLEVEL__)
+
+ /* GCC < 4.9.1 */
+#if GCC_VERSION <= 40901
+
 HIDAPI VOID WINAPI HidD_GetHidGuid(LPGUID);
 HIDAPI BOOL WINAPI HidD_GetPreparsedData(HANDLE, PHIDP_PREPARSED_DATA *);
 HIDAPI BOOL WINAPI HidD_FreePreparsedData(PHIDP_PREPARSED_DATA);
@@ -73,7 +81,10 @@ HIDAPI BOOL WINAPI HidD_SetConfiguration(HANDLE, PHIDD_CONFIGURATION, ULONG);
 HIDAPI BOOL WINAPI HidD_GetPhysicalDescriptor(HANDLE, PVOID, ULONG);
 HIDAPI BOOL WINAPI HidD_GetIndexedString(HANDLE, ULONG, PVOID, ULONG);
 HIDAPI BOOL WINAPI HidD_GetSerialNumberString(HANDLE, PVOID, ULONG);
+
 #endif
+
+#endif // if defined(__GNUC__)
 
 #ifdef __cplusplus
 }

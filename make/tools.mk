@@ -919,10 +919,10 @@ ifeq ($(UNAME), Windows)
 libkml_install: libkml_clean
         # download the source
 	$(V0) @echo " DOWNLOAD     $(LIBKML_URL) @ $(LIBKML_REV)"
-	#$(V1) [ ! -d "$(LIBKML_BUILD_DIR)" ] || $(RM) -rf "$(LIBKML_BUILD_DIR)"
-	$(V1) mkdir -p "$(LIBKML_BUILD_DIR)"
+	# $(V1) [ ! -d "$(LIBKML_BUILD_DIR)" ] || $(RM) -rf "$(LIBKML_BUILD_DIR)"
 	$(V1) ( \
 	  [ ! -d "$(LIBKML_BUILD_DIR)/.git" ] && \
+	  mkdir -p "$(LIBKML_BUILD_DIR)" && \
 	  git clone --no-checkout $(LIBKML_URL) "$(LIBKML_BUILD_DIR)" ; \
 	)
 	$(V1) ( \
@@ -938,6 +938,7 @@ libkml_install: libkml_clean
 	  ./autogen.sh ; \
 	  cd $(LIBKML_BUILD_DIR)/build ; \
 	  ../configure --prefix="$(LIBKML_INSTALL_DIR)" \
+	    --enable-static \
 	    --with-expat-include-dir="$(LIBKML_BUILD_DIR)/third_party/expat.win32" \
 	    --with-expat-lib-dir="$(LIBKML_BUILD_DIR)/third_party/expat.win32"; \
 	  $(MAKE) ; \
@@ -984,8 +985,8 @@ endif
 libkml_clean:
 	$(V0) @echo " CLEAN        $(LIBKML_INSTALL_DIR)"
 	$(V1) [ ! -d "$(LIBKML_INSTALL_DIR)" ] || $(RM) -rf "$(LIBKML_INSTALL_DIR)"
-	$(V0) @echo " CLEAN        $(LIBKML_BUILD_DIR)"
-	$(V1) [ ! -d "$(LIBKML_BUILD_DIR)" ] || $(RM) -rf "$(LIBKML_BUILD_DIR)"
+	#$(V0) @echo " CLEAN        $(LIBKML_BUILD_DIR)"
+	#$(V1) [ ! -d "$(LIBKML_BUILD_DIR)" ] || $(RM) -rf "$(LIBKML_BUILD_DIR)"
 
 
 

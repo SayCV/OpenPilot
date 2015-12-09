@@ -206,7 +206,7 @@ plugin_uavobjectutil.depends = plugin_coreplugin
 plugin_uavobjectutil.depends += plugin_uavobjects
 SUBDIRS += plugin_uavobjectutil
 
-#win32: CONFIG += KML
+win32: CONFIG += KML
 
 KML { 
     # KML Export plugin
