@@ -26,4 +26,4 @@ else:unix: {
     LIBS *= -L$$PWD/../../../../../tools/libkml/lib/
 }
 
-LIBS *= -lkmlbase -lkmlconvenience -lkmlengine -lkmlregionator -lkmldom -lkmlxsd -lminizip -luriparser -lgcc -lstdc++
+LIBS *= -lkmlxsd -lkmlregionator -lkmlengine -lkmlconvenience -lkmldom -lkmlbase -lminizip -luriparser -lz -lexpat
